@@ -112,10 +112,7 @@ route.put("/review/:id", (req, res) => {
                 } else {
                     Reviews.findOne({where: {id: req.params.id}})
                         .then(review => {
-
-                            // album.title = req.body.title;
-                            // album.genre = req.body.genre;
-                            // album.year = req.body.year;
+                            
                             review.body = req.body.body;
                             review.rating = req.body.rating;
 

@@ -35,11 +35,13 @@ function init() {
                     <h3>${review.album.artist.name} - ${review.album.title}</h3>
                     <p>${review.body}</p>
                     <p>Rating: ${review.rating}</p>
-                    <button type="submit" class="delete-review-button">Delete review</button>  
+                    <button type="submit" class="delete-review-button">Delete review</button>
+                    <button type="submit" class="edit-review-button">Edit review</button>
                 </div>
                 `
             });
             addDeleteButtons();
+            addEditButtons();
         });
 
 
@@ -87,7 +89,8 @@ function init() {
                         <h3>${albumArtistTitle}</h3>
                         <p>${data.body}</p>
                         <p>Rating: ${data.rating}</p>  
-                        <button type="submit" class="delete-review-button">Delete review</button>  
+                        <button type="submit" class="delete-review-button">Delete review</button>
+                        <button type="submit" class="edit-review-button">Edit review</button>
                     </div>
                 `
                 }
@@ -121,4 +124,62 @@ function addDeleteButtons() {
             });
         })
     }
+}
+
+function addEditButtons() {
+    let edit = 0
+    const buttons = document.getElementsByClassName("edit-review-button");
+    for(let i = 0; i < buttons.length; i++){
+        buttons[i].addEventListener("click", e => {
+            e.preventDefault();
+
+            if(edit == 0){
+                buttons[i].parentElement.children[1].innerHTML = `<textarea id="album-edit" name="reviews" rows="4" cols="32" placeholder="Write your review here..."></textarea>`
+                buttons[i].parentElement.children[2].innerHTML = `Rating: <input type="number" min="1" max="5" step="1" placeholder="Rate" required id="edit-rating"/>`
+                buttons[i].innerHTML = "Save changes"
+                edit = 1;
+            }
+            else {
+
+                const data = {
+                    id: buttons[i].parentElement.id,
+                    body: document.getElementById("album-edit").value,
+                    rating: document.getElementById("edit-rating").value
+                }
+        
+                //Provera da li je neko polje prazno:
+                let error = false;
+                for(el in data){
+                    if(data[el] == "") {
+                        error = true;
+                    }
+                }
+        
+                if(error){
+                    alert("In order to edit an album, you have to fill in all the fields first.")
+                    return;
+                }
+        
+        
+                fetch('http://localhost:8080/admin/review/' + data.id, {
+                    method: 'PUT',
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify(data) 
+                })
+                    .then( res => res.json() )
+                    .then( data => {
+                        if(data.msg){
+                            alert(data.msg);
+                        }
+                    });
+
+                location.reload();
+        
+                buttons[i].innerHTML = "Edit review"
+            }
+        })
+    };
 }

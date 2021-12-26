@@ -43,9 +43,9 @@ const newReviewCheck = Joi.object({
 });
 
 const updateReviewCheck = Joi.object({
+    id: Joi.number().integer(),
     body: Joi.string().trim().required(),
-    rating: Joi.number().integer().min(1).max(5).required(),
-
+    rating: Joi.number().integer().min(1).max(5).required()
 });
 
 
