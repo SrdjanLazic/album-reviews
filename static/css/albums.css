@@ -1,0 +1,36 @@
+table#album-table {
+    width: 50%;
+    background-color: #ffffff;
+    border-collapse: collapse;
+    border-width: 2px;
+    border-color: #000000;
+    border-style: solid;
+    color: #000000;
+  }
+  
+  table#album-table td, table#album-table th {
+    border-width: 2px;
+    border-color: #000000;
+    border-style: solid;
+    padding: 5px;
+  }
+  
+  table#album-table thead {
+    background-color: #d1d1d1;
+  }
+
+  #new-album-form {
+      margin-top: 2rem;
+  }
+
+  #add-new-album-button {
+      margin-top: 1rem;
+  }
+
+  #delete-artists {
+    margin-top: 2rem;
+  }
+
+  html * {
+    font-family: 'Roboto';
+  }

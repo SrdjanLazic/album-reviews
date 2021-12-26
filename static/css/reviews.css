@@ -1,0 +1,23 @@
+div {
+    word-wrap: break-word;
+  }
+
+.container {
+    padding: 2px 16px;
+    max-width: 15%;
+    background-color: rgb(211, 211, 211);
+    padding: 2%;
+    margin: 1.5rem .5rem 2rem .5rem;
+}
+
+.new-album-div {
+  margin-left: .5rem;
+}
+
+html * {
+  font-family: 'Roboto';
+}
+
+h1 {
+  margin-left: .5rem;
+}

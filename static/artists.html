@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/artists.css">
+    <script src="js/artists.js"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <title>Artists</title>
+</head>
+<body onload="init()">
+    <h1>Artists</h1>
+
+    <table id="artist-table">
+        <thead>
+          <tr>
+            <th>Artist name</th>
+          </tr>
+        </thead>
+        <tbody id="artists">
+        </tbody>
+      </table>
+      <h2>Create:</h2>
+      <div id="new-artist-form">
+        <form action="/admin/artists" method="post">
+            <input type="text" id="artist-name" name="artist" placeholder="Enter artist name" required/>
+            <br>
+            <button type="submit" id="new-artist-button">Add</button>
+        </form>
+      </div>
+      <h2>Update, Delete:</h2>
+      <div id="delete-artists">
+        <form action="/admin/artists">
+          <label>Choose an artist you wish to remove or rename:</label>
+          <select name="artists" id="artists-dropdown"></select>
+          <input type="submit" value="Delete" id="delete-artist-button">
+          <br>
+          <input type="text" id="artist-new-name" name="artist" placeholder="Enter new artist name" required/>
+          <br>
+          <button type="submit" id="rename-artist-button">Rename</button>
+        </form>
+      </div>
+
+
+</body>
+</html>
