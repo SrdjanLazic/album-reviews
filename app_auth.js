@@ -85,5 +85,5 @@ app.post("/login", (req, res) => {
 
 app.listen({ port: 8081 }, async () => {
     await sequelize.authenticate();
-    console.log("Auth server listening on port 8081.");
+    console.log("Auth service listening on port 8081.");
 });

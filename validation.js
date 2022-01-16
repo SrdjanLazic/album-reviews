@@ -52,6 +52,11 @@ const userCheck = Joi.object({
     id: Joi.number().integer().min(1)
 });
 
+const passwordUpdateCheck = Joi.object({
+    id: Joi.number().integer().min(1),
+    password: Joi.string().trim().alphanum().min(3).max(20).required()
+});
+
 
 
 module.exports = { 
@@ -63,5 +68,6 @@ module.exports = {
     updateArtistCheck,
     updateAlbumCheck,
     updateReviewCheck,
-    userCheck
+    userCheck,
+    passwordUpdateCheck
 };

@@ -55,4 +55,32 @@ function init() {
                 }
             });
     })
+    document.getElementById("change-user-password-button").addEventListener("click", e => {
+
+        e.preventDefault();
+
+        const data = {
+            password: document.getElementById("user-new-password").value,
+            id: document.getElementById('users-dropdown').value
+        }
+
+        document.getElementById("user-new-password").value = "";
+
+        fetch('http://localhost:8082/admin/user/' + data.id, {
+            method: 'PUT',
+            headers: { 
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify(data) 
+        })
+            .then( res => res.json() )
+            .then( data => {
+                if(data.msg){
+                    alert(data.msg);
+                } else {
+                    window.location.reload();
+                }
+            });
+    })
 }

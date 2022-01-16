@@ -23,12 +23,17 @@
 
         </tbody>
     </table>
-    <h2>Delete:</h2>
+    <h2>Update, Delete:</h2>
       <div id="delete-users">
         <form action="/admin/users">
-          <label>Choose a user you wish to remove or update:</label>
+          <label>Choose a user you wish to remove:</label>
           <select name="users" id="users-dropdown"></select>
           <input type="submit" value="Delete" id="delete-user-button">
+          <br>
+          <label>Change your password:</label>
+          <input type="password" id="user-new-password" name="user" placeholder="Enter new user password" required/>
+          <br>
+          <button type="submit" id="change-user-password-button">Change password</button>
         </form>
       </div>
     

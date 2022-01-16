@@ -20,5 +20,5 @@ app.use("/admin", users, albums, artists, reviews);
 
 app.listen({ port: 8082 }, async () => {
     await sequelize.authenticate();
-    console.log("Pokrenut rest servis");
+    console.log("Rest service listening on port 8082");
 });

@@ -60,5 +60,5 @@ app.use(express.static(path.join(__dirname, 'static')));
 
 app.listen({ port: 8080 }, async () => {
     await sequelize.authenticate();
-    console.log("Pokrenut app server.");
+    console.log("App listening on port 8080");
 });

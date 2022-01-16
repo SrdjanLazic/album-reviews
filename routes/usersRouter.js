@@ -1,8 +1,9 @@
 const express = require('express');
 const { sequelize, Users } = require('../models');
 const jwt = require('jsonwebtoken');
-const { userCheck } = require('../validation');
+const { userCheck, passwordUpdateCheck } = require('../validation');
 require('dotenv').config();
+const bcrypt = require('bcrypt');
 
 const route = express.Router();
 route.use(express.json());
@@ -58,5 +59,32 @@ route.delete("/user/:id", (req, res) => {
             }
         }) 
 });
+
+route.put("/user/:id", (req, res) => {
+    Users.findOne({ where: { id: req.user.userId } })
+        .then(user => {
+            if(req.body.id == user.id){
+                const check = passwordUpdateCheck.validate(req.body);
+                if(check.error){
+                    res.status(422).json({ msg: check.error.message });
+                } else {
+                    Users.findOne({where: {id: req.params.id}})
+                        .then(user => {
+                            user.password = bcrypt.hashSync(req.body.password, 10)
+                            user.save()
+                                .then( rows => res.json(rows) )
+                                .catch( err => res.status(500).json(err));
+                        })
+                        .catch(err => res.status(500).json(err))
+                    }
+                }
+                else {
+                    res.status(403).json({ msg: "You can only change your own password."});
+                }
+        })
+        .catch(err => res.status(500).json(err))
+});
+
+
 
 module.exports = route;
