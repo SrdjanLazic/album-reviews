@@ -19,7 +19,7 @@ const newAlbumCheck = Joi.object({
 });
 
 const updateAlbumCheck = Joi.object({
-    id: Joi.number().integer().required(),
+    id: Joi.number().integer().required().min(1),
     year: Joi.number().integer().required(),
     genre: Joi.string().trim().min(1).required(),
     title: Joi.string().trim().min(1).required(),
@@ -30,12 +30,12 @@ const newArtistCheck = Joi.object({
 });
 
 const updateArtistCheck = Joi.object({
-    id: Joi.number().integer().required(),
+    id: Joi.number().integer().required().min(1),
     name: Joi.string().trim().min(1).required()
 })
 
 const newReviewCheck = Joi.object({
-    id: Joi.number().integer(),
+    id: Joi.number().integer().min(1),
     body: Joi.string().trim().required(),
     rating: Joi.number().integer().min(1).max(5).required(),
     userId: Joi.number().integer(),
@@ -43,9 +43,13 @@ const newReviewCheck = Joi.object({
 });
 
 const updateReviewCheck = Joi.object({
-    id: Joi.number().integer(),
+    id: Joi.number().integer().min(1),
     body: Joi.string().trim().required(),
     rating: Joi.number().integer().min(1).max(5).required()
+});
+
+const userCheck = Joi.object({
+    id: Joi.number().integer().min(1)
 });
 
 
@@ -58,5 +62,6 @@ module.exports = {
     newReviewCheck,
     updateArtistCheck,
     updateAlbumCheck,
-    updateReviewCheck
+    updateReviewCheck,
+    userCheck
 };

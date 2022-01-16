@@ -1,7 +1,9 @@
+const cookies = document.cookie.split('=');
+const token = cookies[cookies.length - 1];
+
 function init() {
 
-    const cookies = document.cookie.split('=');
-    const token = cookies[cookies.length - 1];
+    
 
     fetch('http://localhost:8082/admin/artists', {
         headers: {

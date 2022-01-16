@@ -1,6 +1,7 @@
 const express = require('express');
 const { sequelize, Users } = require('../models');
 const jwt = require('jsonwebtoken');
+const { userCheck } = require('../validation');
 require('dotenv').config();
 
 const route = express.Router();
@@ -36,6 +37,7 @@ route.get("/user/:id", (req, res) => {
 });
 
 route.delete("/user/:id", (req, res) => {
+
     Users.findOne({where: {id: req.user.userId}})
         .then(user => {
             if(user.role == "admin"){
@@ -55,31 +57,6 @@ route.delete("/user/:id", (req, res) => {
                 res.status(403).json({ msg: "Only admin can delete users."});
             }
         }) 
-});
-
-route.put("/user/:id", (req, res) => {
-    Users.findOne({ where: { id: req.user.userId } })
-        .then(user => {
-            if(user.role == "admin"){
-                const check = updateArtistCheck.validate(req.body);
-                if(check.error){
-                    res.status(422).json({ msg: check.error.message });
-                } else {
-                    Artists.findOne({where: {id: req.params.id}})
-                        .then(artist => {
-                            artist.name = req.body.name
-                            artist.save()
-                                .then( rows => res.json(rows) )
-                                .catch( err => res.status(500).json(err));
-                        })
-                        .catch(err => res.status(500).json(err))
-                }
-            }
-            else {
-                res.status(403).json({ msg: "Only admin can update artists."});
-            }
-        })
-        .catch(err => res.status(500).json(err));
 });
 
 module.exports = route;

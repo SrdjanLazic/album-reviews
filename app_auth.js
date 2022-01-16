@@ -51,7 +51,7 @@ app.post("/register", (req, res) => {
             const token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
             res.json({ token: token });
     
-        }).catch( err => res.status(500).json({msg: "Doslo je do greske prilikom registracije. "}));
+        }).catch( err => res.status(500).json({msg: "Registration unsuccessful. "}));
     }
 })
 
@@ -85,5 +85,5 @@ app.post("/login", (req, res) => {
 
 app.listen({ port: 8081 }, async () => {
     await sequelize.authenticate();
-    console.log("Pokrenut auth server.");
+    console.log("Auth server listening on port 8081.");
 });
