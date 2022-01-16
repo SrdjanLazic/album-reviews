@@ -8,29 +8,29 @@ table#artist-table {
     color: #000000;
   }
   
-  table#artist-table td, table#artist-table th {
-    border-width: 2px;
-    border-color: #000000;
-    border-style: solid;
-    padding: 5px;
-  }
-  
-  table#artist-table thead {
-    background-color: #d1d1d1;
-  }
+table#artist-table td, table#artist-table th {
+  border-width: 2px;
+  border-color: #000000;
+  border-style: solid;
+  padding: 5px;
+}
 
-  #new-artist-form {
-      margin-top: 2rem;
-  }
+table#artist-table thead {
+  background-color: #d1d1d1;
+}
 
-  #artist-button {
-      margin-top: 1rem;
-  }
-
-  #delete-artists {
+#new-artist-form {
     margin-top: 2rem;
-  }
+}
 
-  html * {
-    font-family: 'Roboto';
-  }
+#artist-button {
+    margin-top: 1rem;
+}
+
+#delete-artists {
+  margin-top: 2rem;
+}
+
+html * {
+  font-family: 'Roboto';
+}
