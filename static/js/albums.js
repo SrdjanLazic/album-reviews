@@ -3,7 +3,7 @@ function init() {
     const cookies = document.cookie.split('=');
     const token = cookies[cookies.length - 1];
 
-    fetch('http://localhost:8080/admin/albums', {
+    fetch('http://localhost:8082/admin/albums', {
         headers: {
             'Authorization': `Bearer ${token}`
         }
@@ -33,7 +33,7 @@ function init() {
             })
         });
 
-    fetch('http://localhost:8080/admin/artists', {
+    fetch('http://localhost:8082/admin/artists', {
         headers: {
             'Authorization': `Bearer ${token}`
         }
@@ -80,7 +80,7 @@ function init() {
             return;
         }
 
-        fetch('http://localhost:8080/admin/albums', {
+        fetch('http://localhost:8082/admin/albums', {
             method: 'POST',
             headers: { 
                 'Content-Type': 'application/json',
@@ -134,7 +134,7 @@ function init() {
         }
 
 
-        fetch('http://localhost:8080/admin/album/' + data.id, {
+        fetch('http://localhost:8082/admin/album/' + data.id, {
             method: 'PUT',
             headers: { 
                 'Content-Type': 'application/json',
@@ -147,9 +147,10 @@ function init() {
                 // potrazi kako se koristi data atribut
                 if(data.msg){
                     alert(data.msg);
+                } else {
+                    window.location.reload();
                 }
             });
-        location.reload();
     });
 
     document.getElementById("delete-album-button").addEventListener("click", e => {
@@ -160,7 +161,7 @@ function init() {
             id: document.getElementsByClassName('albums-dropdown')[1].value,
         }
 
-        fetch('http://localhost:8080/admin/album/' + data.id, {
+        fetch('http://localhost:8082/admin/album/' + data.id, {
             method: 'DELETE',
             headers: { 
                 'Content-Type': 'application/json',
@@ -172,10 +173,10 @@ function init() {
             .then( data => {
                 if(data.msg){
                     alert(data.msg);
+                } else {
+                    window.location.reload();
                 }
             });
-
-        location.reload();
     });
 
     

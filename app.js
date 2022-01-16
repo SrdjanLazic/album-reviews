@@ -2,19 +2,19 @@
 const express = require("express");
 const app = express();
 
-// Modeli i rute
+// Modeli
 const { sequelize } = require('./models');
-const users = require("./routes/usersRouter");
-const albums = require("./routes/albumsRouter");
-const artists = require("./routes/artistsRouter");
-const reviews = require("./routes/reviewsRouter");
+// const users = require("./routes/usersRouter");
+// const albums = require("./routes/albumsRouter");
+// const artists = require("./routes/artistsRouter");
+// const reviews = require("./routes/reviewsRouter");
 
 // Path, JWT, .env
 const path = require("path");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
-app.use("/admin", users, albums, artists, reviews);
+// app.use("/admin", users, albums, artists, reviews);
 
 function getCookies(req) {
     if (req.headers.cookie == null) return {};
@@ -44,7 +44,6 @@ function authToken(req, res, next) {
     });
 }
 
-// TODO
 app.get('/register', (req, res) => {
     res.sendFile('register.html', { root: './static' });
 });

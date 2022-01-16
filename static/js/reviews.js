@@ -3,7 +3,7 @@ const token = cookies[cookies.length - 1];
 
 function init() {
 
-    fetch('http://localhost:8080/admin/albums', {
+    fetch('http://localhost:8082/admin/albums', {
         headers: {
             'Authorization': `Bearer ${token}`
         }
@@ -18,7 +18,7 @@ function init() {
             })
         });
 
-    fetch('http://localhost:8080/admin/reviews', {
+    fetch('http://localhost:8082/admin/reviews', {
         headers: {
             'Authorization': `Bearer ${token}`
         }
@@ -45,7 +45,7 @@ function init() {
         });
 
 
-    document.getElementById("add-review").addEventListener("click", e => {
+    document.getElementById("add-review").addEventListener("click", e => {  
 
         e.preventDefault();
 
@@ -69,7 +69,7 @@ function init() {
         let albumArtistTitle = album.options[album.selectedIndex].innerHTML;
 
 
-        fetch('http://localhost:8080/admin/reviews', {
+        fetch('http://localhost:8082/admin/reviews', {
             method: 'POST',
             headers: { 
                 'Content-Type': 'application/json',
@@ -95,7 +95,6 @@ function init() {
                 `
                 }
             });
-
     });
 }
 
@@ -108,7 +107,7 @@ function addDeleteButtons() {
                 id: buttons[i].parentNode.id
             };
 
-            fetch('http://localhost:8080/admin/reviews/' + data.id, {
+            fetch('http://localhost:8082/admin/reviews/' + data.id, {
             method: 'DELETE',
             headers: { 
                 'Content-Type': 'application/json',
@@ -120,6 +119,8 @@ function addDeleteButtons() {
             .then( data => {
                 if(data.msg){
                     alert(data.msg);
+                } else {
+                    location.reload();
                 }
             });
         })
@@ -161,7 +162,7 @@ function addEditButtons() {
                 }
         
         
-                fetch('http://localhost:8080/admin/review/' + data.id, {
+                fetch('http://localhost:8082/admin/review/' + data.id, {
                     method: 'PUT',
                     headers: { 
                         'Content-Type': 'application/json',
@@ -173,12 +174,11 @@ function addEditButtons() {
                     .then( data => {
                         if(data.msg){
                             alert(data.msg);
+                            location.reload();
+                        } else {
+                            location.reload();
                         }
                     });
-
-                location.reload();
-        
-                buttons[i].innerHTML = "Edit review"
             }
         })
     };

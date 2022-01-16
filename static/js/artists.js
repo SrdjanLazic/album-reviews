@@ -3,7 +3,7 @@ function init() {
     const cookies = document.cookie.split('=');
     const token = cookies[cookies.length - 1];
 
-    fetch('http://localhost:8080/admin/artists', {
+    fetch('http://localhost:8082/admin/artists', {
         headers: {
             'Authorization': `Bearer ${token}`
         }
@@ -40,7 +40,7 @@ function init() {
 
         document.getElementById("artist-name").value = "";
 
-        fetch('http://localhost:8080/admin/artists', {
+        fetch('http://localhost:8082/admin/artists', {
             method: 'POST',
             headers: { 
                 'Content-Type': 'application/json',
@@ -73,7 +73,7 @@ function init() {
             id: document.getElementById('artists-dropdown').value
         };
         
-        fetch('http://localhost:8080/admin/artist/' + data.id, {
+        fetch('http://localhost:8082/admin/artist/' + data.id, {
             method: 'DELETE',
             headers: { 
                 'Content-Type': 'application/json',
@@ -85,9 +85,10 @@ function init() {
             .then( data => {
                 if(data.msg){
                     alert(data.msg);
+                } else {
+                    window.location.reload();
                 }
             });
-        location.reload();
     })
 
 
@@ -103,7 +104,7 @@ function init() {
 
         document.getElementById("artist-new-name").value = "";
 
-        fetch('http://localhost:8080/admin/artist/' + data.id, {
+        fetch('http://localhost:8082/admin/artist/' + data.id, {
             method: 'PUT',
             headers: { 
                 'Content-Type': 'application/json',
@@ -115,8 +116,9 @@ function init() {
             .then( data => {
                 if(data.msg){
                     alert(data.msg);
+                } else {
+                    window.location.reload();
                 }
             });
-        location.reload();
     })
 }
